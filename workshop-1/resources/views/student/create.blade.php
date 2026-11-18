@@ -1,91 +1,22 @@
-<!DOCTYPE html>
 
-<html>
+<x-layouts.app title="Create Student">
 
-<head>
-    <title>Create Student</title>
-</head>
-
-<body>
     <h1>Create Student</h1>
 
-@if($errors->any())
-    <div>
-        <h3>Please fix the following errors:</h3>
+    <form action="{{ route('students.store') }}" method="POST">
 
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+        @csrf
 
-<form action="/students" method="POST">
-    @csrf
+        <x-students.form :student="new \App\Models\Student()" />
 
-    <div>
-        <label for="name">Name</label>
-        <input
-            type="text"
-            id="name"
-            name="name"
-            value="{{ old('name') }}">
-    </div>
+        <button type="submit" class="btn">
+            Create Student
+        </button>
 
-    <br>
+        <a href="{{ route('students.index') }}">
+            Cancel
+        </a>
 
-    <div>
-        <label for="email">Email</label>
-        <input
-            type="email"
-            id="email"
-            name="email"
-            value="{{ old('email') }}">
-    </div>
+    </form>
 
-    <br>
-
-    <div>
-        <label for="phone">Phone</label>
-        <input
-            type="text"
-            id="phone"
-            name="phone"
-            value="{{ old('phone') }}">
-    </div>
-
-    <br>
-
-    <div>
-        <label for="address">Address</label>
-        <textarea
-            id="address"
-            name="address">{{ old('address') }}</textarea>
-    </div>
-
-    <br>
-
-    <div>
-        <label for="date_of_birth">Date of Birth</label>
-        <input
-            type="date"
-            id="date_of_birth"
-            name="date_of_birth"
-            value="{{ old('date_of_birth') }}">
-    </div>
-
-    <br>
-
-    <button type="submit">
-        Create Student
-    </button>
-</form>
-
-<br>
-
-<a href="/students">Back to Students</a>
-
-</body>
-
-</html>
+</x-layouts.app>
